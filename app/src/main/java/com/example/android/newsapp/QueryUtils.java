@@ -160,9 +160,9 @@ public final class QueryUtils {
             // Create a JSONObject from the JSON response string
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
 
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or news).
-            JSONArray newsArray = baseJsonResponse.getJSONArray("features");
+            // Extract the JSONArray associated with the key called "results",
+            // which represents a list of results (or news).
+            JSONArray newsArray = baseJsonResponse.getJSONArray("results");
 
             // For each new in the newArray, create an {@link News} object
             for (int i = 0; i < newsArray.length(); i++) {
@@ -172,23 +172,23 @@ public final class QueryUtils {
                 JSONObject currentNews = newsArray.getJSONObject(i);
 
                 // For a given news, extract the JSONObject associated with the
-                // key called "properties", which represents a list of all properties
+                // key called "results", which represents a list of all results
                 // for that news.
 
-                JSONObject properties = currentNews.getJSONObject("properties");
+                JSONObject results = currentNews.getJSONObject("results");
 
-                // Extract the value for the key called "title"
-                String title = properties.getString("title");
+                // Extract the value for the key called "webTitle"
+                String webTitle = results.getString("webTitle");
 
-                // Extract the value for the key called "section"
-                String section = properties.getString("section");
+                // Extract the value for the key called "sectionName"
+                String sectionName = results.getString("sectionName");
 
-                // Extract the value for the key called "url"
-                String url = properties.getString("url");
+                // Extract the value for the key called "webUrl"
+                String webUrl = results.getString("webUrl");
 
                 // Create a new {@link News} object with the title and the section
                 // and url from the JSON response.
-                new News(title, section, url);
+                new News(webTitle, sectionName, webUrl);
 
             }
 

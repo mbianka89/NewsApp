@@ -22,7 +22,7 @@ public class NewsActivity extends AppCompatActivity
     private static final String LOG_TAG = NewsActivity.class.getName();
 
     private static final String NEWS_JSON =
-            "http://content.guardianapis.com/search?";
+            "https://content.guardianapis.com/search?android&api-key=test";
 
     /**
      * Constant value for the news loader ID.
@@ -102,7 +102,7 @@ public class NewsActivity extends AppCompatActivity
         if (mQuery != null && mQuery != "") {
             requestUrl = NEWS_JSON + mQuery;
         } else {
-            String defaultQuery = "android";
+            String defaultQuery = "android&api-key=test";
             requestUrl = NEWS_JSON + defaultQuery;
         }
         // Create a new loader for the given URL
