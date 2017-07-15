@@ -167,17 +167,16 @@ public final class QueryUtils {
                 // Get a single news at position i within the list of news
                 JSONObject currentNews = newsArray.getJSONObject(i);
 
+
                 // For a given news, extract the JSONObject associated with the
                 // key called "results", which represents a list of all results
                 // for that news.
 
-                JSONObject results = currentNews.getJSONObject("results");
-
                 // Extract the value for the key called "webTitle"
-                String webTitle = results.getString("webTitle");
+                String webTitle = currentNews.getString("webTitle");
 
                 // Extract the value for the key called "sectionName"
-                String sectionName = results.getString("sectionName");
+                String sectionName = currentNews.getString("sectionName");
 
                 // Create a new {@link News} object with the title and the section
                 // and url from the JSON response.
