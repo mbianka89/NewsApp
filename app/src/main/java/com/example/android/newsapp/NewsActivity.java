@@ -117,6 +117,7 @@ public class NewsActivity extends AppCompatActivity
             }
         });
     }
+
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
