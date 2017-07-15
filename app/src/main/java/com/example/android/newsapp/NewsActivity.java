@@ -48,7 +48,7 @@ public class NewsActivity extends AppCompatActivity
 
 
         // Find a reference to the {@link ListView} in the layout
-        ListView newsListView = (ListView) findViewById(R.id.news_list);
+        ListView newsListView = (ListView) findViewById(R.id.list);
 
         mEmptyStateTextView = (TextView)
 

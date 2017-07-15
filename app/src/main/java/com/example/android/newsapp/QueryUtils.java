@@ -22,7 +22,6 @@ import java.util.List;
  * Created by Bianka Matyas on 04/07/2017.
  */
 
-
 /**
  * Helper methods related to requesting and receiving news data from Guardian API.
  */
@@ -157,16 +156,13 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
-            // Create a JSONObject from the JSON response string
-            JSONObject baseJsonResponse = new JSONObject(newsJSON);
-
             // Extract the JSONArray associated with the key called "results",
             // which represents a list of results (or news).
+            JSONObject baseJsonResponse = new JSONObject(newsJSON).getJSONObject("response");
             JSONArray newsArray = baseJsonResponse.getJSONArray("results");
 
             // For each new in the newArray, create an {@link News} object
             for (int i = 0; i < newsArray.length(); i++) {
-
 
                 // Get a single news at position i within the list of news
                 JSONObject currentNews = newsArray.getJSONObject(i);
@@ -183,11 +179,9 @@ public final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String sectionName = results.getString("sectionName");
 
-
                 // Create a new {@link News} object with the title and the section
                 // and url from the JSON response.
-                new News(webTitle, sectionName);
-
+                news.add(new News(webTitle, sectionName));
             }
 
         } catch (JSONException e) {
