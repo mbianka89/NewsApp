@@ -21,8 +21,8 @@ public class NewsActivity extends AppCompatActivity
 
     private static final String LOG_TAG = NewsActivity.class.getName();
 
-    private static final String NEWS_JSON =
-            "https://content.guardianapis.com/search?android&api-key=test";
+    private static final String REQUEST_URL =
+            "http://content.guardianapis.com/search?q=world%20AND%20health&show-fields=thumbnail&api-key=test";
 
     /**
      * Constant value for the news loader ID.
@@ -98,16 +98,8 @@ public class NewsActivity extends AppCompatActivity
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        String requestUrl = "";
-        if (mQuery != null && mQuery != "") {
-            requestUrl = NEWS_JSON + mQuery;
-        } else {
-            String defaultQuery = "android&api-key=test";
-            requestUrl = NEWS_JSON + defaultQuery;
-        }
         // Create a new loader for the given URL
-        return new NewsLoader(this, requestUrl);
-
+        return new NewsLoader(this, REQUEST_URL);
     }
 
     @Override
@@ -115,7 +107,7 @@ public class NewsActivity extends AppCompatActivity
         //Set empty state view text to display "No news found"
         mEmptyStateTextView.setText(R.string.no_news_found);
         //Hide the loading indicator because the data has been loaded.
-        loadingIndicator = (ProgressBar)findViewById(R.id.loading_indicator);
+        loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
         //Clear the adapter of previous news data
         mAdapter.clear();

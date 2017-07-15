@@ -183,12 +183,10 @@ public final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String sectionName = results.getString("sectionName");
 
-                // Extract the value for the key called "webUrl"
-                String webUrl = results.getString("webUrl");
 
                 // Create a new {@link News} object with the title and the section
                 // and url from the JSON response.
-                new News(webTitle, sectionName, webUrl);
+                new News(webTitle, sectionName);
 
             }
 
