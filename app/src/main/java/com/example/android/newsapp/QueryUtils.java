@@ -178,9 +178,13 @@ public final class QueryUtils {
                 // Extract the value for the key called "sectionName"
                 String sectionName = currentNews.getString("sectionName");
 
+                // Extract the value for the key called "webUrl"
+                String webUrl = currentNews.getString("webUrl");
+
+
                 // Create a new {@link News} object with the title and the section
                 // and url from the JSON response.
-                news.add(new News(webTitle, sectionName));
+                news.add(new News(webTitle, sectionName, webUrl));
             }
 
         } catch (JSONException e) {

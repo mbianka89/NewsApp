@@ -1,17 +1,22 @@
 package com.example.android.newsapp;
 
+import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,7 +99,24 @@ public class NewsActivity extends AppCompatActivity
             mEmptyStateTextView.setText(R.string.no_internet_connection);
         }
 
-    }
+
+
+     newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            News currentArticle =NewsAdapter.getItem(position);
+            Uri articleUri = Uri.parse(currentArticle.getmUrl());
+            Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
+
+            if (null != websiteIntent.resolveActivity(getPackageManager())) {
+                startActivity(websiteIntent);
+            } else {
+                Log.w(LOG_TAG, "Install a browser to read the article.");
+                Toast.makeText(NewsActivity.this, getString(R.string.error_no_browser);
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+     });
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
