@@ -100,23 +100,23 @@ public class NewsActivity extends AppCompatActivity
         }
 
 
+        newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                News currentArticle = NewsAdapter.getItem(position);
+                Uri articleUri = Uri.parse(currentArticle.getmUrl());
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
 
-     newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            News currentArticle =NewsAdapter.getItem(position);
-            Uri articleUri = Uri.parse(currentArticle.getmUrl());
-            Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
-
-            if (null != websiteIntent.resolveActivity(getPackageManager())) {
-                startActivity(websiteIntent);
-            } else {
-                Log.w(LOG_TAG, "Install a browser to read the article.");
-                Toast.makeText(NewsActivity.this, getString(R.string.error_no_browser);
-                        Toast.LENGTH_SHORT).show();
+                if (null != websiteIntent.resolveActivity(getPackageManager())) {
+                    startActivity(websiteIntent);
+                } else {
+                    Log.w(LOG_TAG, "Install a browser to read the article.");
+                    Toast.makeText(NewsActivity.this, getString(R.string.error_no_browser);
+                    Toast.LENGTH_SHORT).show();
+                }
             }
-        }
-     });
+        });
+    }
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
