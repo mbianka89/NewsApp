@@ -1,6 +1,5 @@
 package com.example.android.newsapp;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +16,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +103,7 @@ public class NewsActivity extends AppCompatActivity
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                News currentArticle = NewsAdapter.getItem(position);
+                News currentArticle = mAdapter.getItem(position);
                 Uri articleUri = Uri.parse(currentArticle.getmUrl());
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
 
@@ -111,13 +111,12 @@ public class NewsActivity extends AppCompatActivity
                     startActivity(websiteIntent);
                 } else {
                     Log.w(LOG_TAG, "Install a browser to read the article.");
-                    Toast.makeText(NewsActivity.this, getString(R.string.error_no_browser);
-                    Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewsActivity.this, getString(R.string.error_no_browser),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
         // Create a new loader for the given URL
